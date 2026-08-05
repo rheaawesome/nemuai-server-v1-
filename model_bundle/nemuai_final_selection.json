@@ -1,0 +1,30 @@
+{
+  "selection_source": "validation subjects only",
+  "model_family": "L2 logistic regression",
+  "regularization_C": 0.001,
+  "feature_processing": "75% recording-median centering, training-fitted RobustScaler, 25% recording-logit adjustment",
+  "validation": {
+    "subject_macro_recall": 0.9073714956067898,
+    "subject_macro_specificity": 0.6007596360339922,
+    "subject_macro_balanced_accuracy": 0.7540655658203909,
+    "subject_balanced_accuracy_std": 0.15044576287981185,
+    "pooled_accuracy": 0.7706576728499157,
+    "pooled_precision": 0.7576470588235295,
+    "pooled_f1": 0.8256410256410256,
+    "roc_auc": 0.7508462539945555,
+    "pr_auc": 0.7365278164699915
+  },
+  "fixed_test": {
+    "subject_macro_recall": 0.8263050674815381,
+    "subject_macro_specificity": 0.625722744688262,
+    "subject_macro_balanced_accuracy": 0.7260139060849,
+    "accuracy": 0.674074074074074,
+    "precision": 0.6850393700787402,
+    "f1": 0.725,
+    "roc_auc": 0.7113511642853612,
+    "pr_auc": 0.7250768284328009,
+    "confusion_matrix": [[99,80],[52,174]]
+  },
+  "promotion_status": "numerically eligible; production not overwritten because fixed holdout subjects were observed in prior development rounds",
+  "medical_validation": false
+}

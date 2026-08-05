@@ -1,0 +1,100 @@
+{
+  "schema_version": "nemuai-final-colab-1",
+  "generated_at": "2026-08-04T23:40:19.643379+00:00",
+  "input": {
+    "filename": "america.m4a",
+    "original_format": "m4a",
+    "original_sample_rate": 48000,
+    "processed_sample_rate": 16000,
+    "original_channels": 1,
+    "processed_channels": 1,
+    "duration_seconds": 37.931
+  },
+  "processing": {
+    "window_seconds": 30,
+    "hop_seconds": 5,
+    "recording_center_alpha": 0.75,
+    "score_center_beta": 0.25,
+    "total_windows": 3
+  },
+  "reliability": {
+    "suitable_windows": 0,
+    "excluded_windows": 3,
+    "reliable_audio_seconds": 0.0,
+    "reliable_percentage": 0.0,
+    "state_counts": {
+      "speech_or_tv_contamination": 2,
+      "insufficient_duration": 1
+    },
+    "exclusion_counts": {
+      "speech_or_tv_contamination": 2,
+      "insufficient_duration": 1
+    }
+  },
+  "model": {
+    "name": "NemuAI final cached-feature reliability candidate",
+    "version": "second-quick-obstructive-1",
+    "target_event_types": [
+      "Obstructive Apnea",
+      "Mixed Apnea"
+    ],
+    "target_label": "Possible obstructive apnea-like audio pattern",
+    "selected_threshold": 0.3999999999999999,
+    "production_model": false
+  },
+  "validation_metrics": {
+    "subject_macro_recall": 0.9073714956067898,
+    "subject_macro_specificity": 0.6007596360339922,
+    "subject_macro_balanced_accuracy": 0.7540655658203909,
+    "subject_balanced_accuracy_std": 0.15044576287981185,
+    "pooled_accuracy": 0.7706576728499157,
+    "pooled_precision": 0.7576470588235295,
+    "pooled_f1": 0.8256410256410256,
+    "roc_auc": 0.7508462539945555,
+    "pr_auc": 0.7365278164699915
+  },
+  "windows": [
+    {
+      "window_number": 1,
+      "start_seconds": 0.0,
+      "end_seconds": 30.0,
+      "start_time": "00:00:00",
+      "end_time": "00:00:30",
+      "audio_suitability": "speech_or_tv_contamination",
+      "exclusion_reason": "YAMNet speech/TV score 1.000",
+      "raw_probability": null,
+      "calibrated_probability": null,
+      "smoothed_probability": null,
+      "predicted_label": "excluded"
+    },
+    {
+      "window_number": 2,
+      "start_seconds": 5.0,
+      "end_seconds": 35.0,
+      "start_time": "00:00:05",
+      "end_time": "00:00:35",
+      "audio_suitability": "speech_or_tv_contamination",
+      "exclusion_reason": "YAMNet speech/TV score 1.000",
+      "raw_probability": null,
+      "calibrated_probability": null,
+      "smoothed_probability": null,
+      "predicted_label": "excluded"
+    },
+    {
+      "window_number": 3,
+      "start_seconds": 10.0,
+      "end_seconds": 37.9306875,
+      "start_time": "00:00:10",
+      "end_time": "00:00:37",
+      "audio_suitability": "insufficient_duration",
+      "exclusion_reason": "Window has less than 30 seconds of real audio",
+      "raw_probability": null,
+      "calibrated_probability": null,
+      "smoothed_probability": null,
+      "predicted_label": "excluded"
+    }
+  ],
+  "merged_events": [],
+  "overall_experimental_result": "insufficient_reliable_audio",
+  "disclaimer": "NemuAI is an experimental audio-based screening prototype. It may flag possible obstructive or mixed apnea-like sound patterns, but it does not diagnose sleep apnea, calculate clinical AHI, or replace polysomnography or evaluation by a qualified medical professional."
+}
