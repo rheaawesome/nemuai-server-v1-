@@ -127,25 +127,31 @@ def decode_audio(path, sample_rate=16000):
 
 
 def generate_windows(waveform, sample_rate, length_seconds, hop_seconds, minimum_final_seconds):
+    # NOTE: this is a generator (yield, not a list + return) on purpose.
+    # For a short clip the difference doesn't matter, but for a long
+    # recording (e.g. ~60 minutes = 700+ windows) building every padded
+    # 30-second window into a list upfront held 1GB+ of audio in memory
+    # simultaneously and was the actual cause of the OOM crashes on Render.
+    # Yielding one window at a time keeps peak memory roughly constant
+    # regardless of recording length, since the caller processes each
+    # window (extracts its YAMNet embedding) before moving to the next.
     length = int(length_seconds * sample_rate)
     hop = int(hop_seconds * sample_rate)
-    rows = []
     for index, start in enumerate(range(0, len(waveform), hop)):
         real = waveform[start:min(start + length, len(waveform))]
         if len(real) < minimum_final_seconds * sample_rate:
             break
         sufficient = len(real) == length
         padded = np.pad(real, (0, length - len(real))).astype(np.float32)
-        rows.append({
+        yield {
             "index": index,
             "start_seconds": start / sample_rate,
             "end_seconds": min((start + length) / sample_rate, len(waveform) / sample_rate),
             "waveform": padded,
             "sufficient_duration": sufficient,
-        })
+        }
         if start + length >= len(waveform) and not sufficient:
             break
-    return rows
 
 
 def assess_quality(waveform, sample_rate, sufficient_duration, config):
